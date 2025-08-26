@@ -2,11 +2,8 @@
   "sections": {
   "banner":{
       "type": "banner"
-    },
-    "grid":{
-      "type": "grid"
     }
   },
-  "order": ["banner", "grid"],
+  "order": ["banner"],
   "layout": "blank"
 }
