@@ -6,16 +6,6 @@
         border: 0;
         /* outline: 1px solid black; */
     }
-    #example{
-        width: 100%;
-        height: 100%;
-        opacity: 0.8;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        z-index: -1;
-    }
     nav{
         padding: 12px 70px;
         background: #f5f5f5;
@@ -39,6 +29,7 @@
         align-items: center;
         gap: 1rem;
         text-transform: uppercase;
+        cursor: pointer;
     }
 
     .choose-gift-button img{
@@ -63,16 +54,14 @@
 </style>
 
 <div>
-    <img src="assets/banner.jpg" id="example" alt="">
     <nav>
         <h1 class="logo">TISSO VISON</h1>
         <div class="tagline">Find the ideal gift for your loved ones.</div>
-        <button class="choose-gift-button">Choose Gift <img src="/assets/arrow.svg" alt=""></button>
+        <button class="choose-gift-button">Choose Gift <img src="{{'arrow.svg' |  asset_url}}"></button>
     </nav>
     <div class="hero-img-container">
-        <img src="assets/hero.svg">
+        <img src="{{'hero.svg'| asset_url}}">
     </div>
     <div>
-        
     </div>
 </div>
