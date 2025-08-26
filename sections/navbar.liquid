@@ -1,7 +1,8 @@
 {{ 'section-navbar.css' | asset_url | stylesheet_tag }}
 
 <header>
-  <nav>
+    <img src="{{'menu.svg' |  asset_url}}" id="menu-icon">
+    <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
     <button class="choose-gift-button">{{ section.settings.button-text }} <img src="{{'arrow.svg' |  asset_url}}"></button>
