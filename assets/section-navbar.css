@@ -15,14 +15,16 @@ nav {
 }
 
 .logo {
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 500;
   text-transform: uppercase;
 }
+
 .tagline {
   font-size: 1.2rem;
   text-transform: capitalize;
 }
+
 .choose-gift-button {
   background: #fff544;
   padding: 0.8rem 3rem;
