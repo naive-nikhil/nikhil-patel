@@ -1,5 +1,8 @@
 {
   "sections": {
+    "main":{
+      "type": "home-custom"
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -68,7 +71,7 @@
       }
     }
   },
-  "order": [
+  "order": ["main",
     "image_banner",
     "featured_collection"
   ]
