@@ -7,6 +7,6 @@
       "type": "banner"
     }
   },
-  "order": ["navbar, banner"],
+  "order": ["navbar", "banner"],
   "layout": "blank"
 }
