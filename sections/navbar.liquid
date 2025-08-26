@@ -1,28 +1,40 @@
-{{'section-navbar.css' |  asset_url |  stylesheet_tag}}
+{{ 'section-navbar.css' | asset_url | stylesheet_tag }}
 
-<nav>
-    <h1 class="logo">{{section.settings.logo-text}}</h1>
-    <div class="tagline">{{section.settings.tagline}}</div>
-    <button class="choose-gift-button">{{section.settings.button-text}} <img src="{{'arrow.svg' |  asset_url}}"></button>
-</nav>
+<header>
+  <nav>
+    <h1 class="logo">{{ section.settings.logo-text }}</h1>
+    <div class="tagline">{{ section.settings.tagline }}</div>
+    <button class="choose-gift-button">{{ section.settings.button-text }} <img src="{{'arrow.svg' |  asset_url}}"></button>
+  </nav>
+</header>
 
 {% schema %}
-{
-  "name": "Navbar",
-  "settings": [
-    { "type": "text", "label": "Logo Text", "id": "logo-text" },
-    { "type": "text", "label": "Tagline", "id": "tagline" },
-    { "type": "text", "label": "Button Text", "id": "button-text" }
-  ],
-  "presets": [
-    {
-      "name": "Navbar",
-      "settings": {
-        "logo-text": "Tisso Vision",
-        "tagline": "Find the ideal gift for your loved ones.",
-        "button-text": "Choose Gift"
+  {
+    "name": "Navbar",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Logo Text",
+        "id": "logo-text"
+      }, {
+        "type": "text",
+        "label": "Tagline",
+        "id": "tagline"
+      }, {
+        "type": "text",
+        "label": "Button Text",
+        "id": "button-text"
       }
-    }
-  ]
-}
+    ],
+    "presets": [
+      {
+        "name": "Navbar",
+        "settings": {
+          "logo-text": "Tisso Vision",
+          "tagline": "Find the ideal gift for your ones.",
+          "button-text": "Choose Gift"
+        }
+      }
+    ]
+  }
 {% endschema %}
