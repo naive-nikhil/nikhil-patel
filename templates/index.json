@@ -1,12 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "navbar": {
-      "type": "navbar"
+      "type": "navbar",
+      "settings": {
+        "logo-text": "Tissio Vision",
+        "tagline": "Find the ideal gift for your loved ones.",
+        "button-text": "choose gift"
+      }
     },
     "banner": {
-      "type": "banner"
+      "type": "banner",
+      "settings": {}
     }
   },
-  "order": ["navbar", "banner"],
+  "order": [
+    "navbar",
+    "banner"
+  ],
   "layout": "blank"
 }
