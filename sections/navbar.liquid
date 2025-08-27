@@ -2,16 +2,17 @@
 
 <header>
   <div id="menu-toggle">
-  <img src="{{'menu.svg' |  asset_url}}" id="menu-icon">
+    <img src="{{'menu.svg' |  asset_url}}" id="menu-icon">
   </div>
   <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
-    <button class="choose-gift-button">{{ section.settings.button-text }} <img src="{{'arrow.svg' |  asset_url}}"></button>
+    <button class="choose-gift-button">
+      <span>{{ section.settings.button-text }}</span><img src="{{'arrow.svg' |  asset_url}}"></button>
   </nav>
   <div id="nav-dropdown">
     <div class="tagline dropdown">{{ section.settings.tagline }}</div>
-    <button class="choose-gift-button dropdown">{{ section.settings.button-text }} <img src="{{'arrow.svg' |  asset_url}}"></button>
+    <button class="choose-gift-button dropdown"><span>{{ section.settings.button-text }}</span> <img src="{{'arrow.svg' |  asset_url}}"></button>
   </div>
 </header>
 
@@ -46,11 +47,13 @@
         "type": "text",
         "label": "Logo Text",
         "id": "logo-text"
-      }, {
+      },
+      {
         "type": "text",
         "label": "Tagline",
         "id": "tagline"
-      }, {
+      },
+      {
         "type": "text",
         "label": "Button Text",
         "id": "button-text"
