@@ -1,6 +1,5 @@
 #hero-container {
   margin: auto;
-  max-width: 1440px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -10,7 +9,8 @@
 }
 
 .img-container {
-  height: 54vh;
+  height: 410px;
+  max-width: 1440px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -20,12 +20,13 @@
 .img-container img {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 1440px;
 }
 
 .content-container {
   max-width: 1440px;
-  height: 54vh;
+  overflow: hidden;
+  height: 400px;
   display: flex;
 }
 
@@ -33,15 +34,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 35%;
+  width: 38%;
 }
 
 .right-section {
-  width: 65%;
+  width: 60%;
 }
 
 .right-section img {
-  width: 100vw;
+  width: 1440px;
 }
 
 .left-section h1 {
