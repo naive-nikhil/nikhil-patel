@@ -98,8 +98,12 @@
   }
 
   .shop-now-btn{
-    /* display: block; */
+    display: flex;
     position: absolute;
+    text-wrap: nowrap;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .left-section{
@@ -120,6 +124,7 @@
   }
 
   .content-container {
+    position: relative;
     max-width: 992px;
     width: 100%;
     flex-direction: column;
