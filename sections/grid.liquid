@@ -5,7 +5,7 @@
   <div class="modal">
     <div class="exit"><img src="{{'cross.svg' |  asset_url}}"></div>
     <div class="about">
-      <div class="img-wrapper"><img src="{{'product-image-2.png' |  asset_url}}"></div>
+      <div class="img-wrapper"><img class="product-img" src="{{'product-image-2.png' |  asset_url}}"></div>
       <div class="about-info">
         <p class="product-title">Leather Jacket</p>
         <h2 class="product-price">980,00$</h2>
@@ -47,9 +47,14 @@
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
       {% for product in collections["frontpage"].products %}
-        <div class="product1"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
+        <script>
+          console.log({{ product | json }});
+        </script>
+        <div
+        class="product1"
+        data-product="{{ product | json |  escape }}"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
       {% endfor %}
-    </div>
+      </div>
   </div>
 </div>
 
@@ -57,10 +62,23 @@
   const modal = document.querySelector(".modal-container");
   const products =  document.querySelectorAll(".product1");
   const closeModal = document.querySelector(".exit");
+
+  const productImage = document.querySelector(".product-img");
+  const productTitle = document.querySelector(".product-title");
+  const productPrice = document.querySelector(".product-price");
+  const productDescription = document.querySelector(".product-description");
   
   products.forEach(product => {
     product.addEventListener("click", ()=>{
+      const data = JSON.parse(product.dataset.product);
+
+      console.log(typeof data.price);
+
       modal.style.display = "flex";
+      productImage.src = data.featured_image;
+      productTitle.textContent = data.title;
+      productPrice.textContent = `${(data.price/100).toFixed(2)} €`;
+      productDescription.innerHTML = data.description;
     })
   })
   
