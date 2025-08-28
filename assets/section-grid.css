@@ -312,4 +312,8 @@
   .add-to-cart{
     margin-top: 2rem;
   }
+
+  .size-dropdown{
+    max-height: 96px;
+  }
 }
