@@ -1,10 +1,42 @@
-{{'section-grid.css' |  asset_url |  stylesheet_tag}}
+{{ 'section-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="modal-container">
+  <div class="modal">
+    <div class="exit"><img src="{{'cross.svg' |  asset_url}}"></div>
+    <div class="about">
+      <div class="img-wrapper"><img src="{{'product-image-2.png' |  asset_url}}"></div>
+      <div class="about-info">
+        <p class="product-title">Tailored Jacket</p>
+        <h2 class="product-price">980,00$</h2>
+        <p class="product-description">This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.</p>
+      </div>
+    </div>
+    <div class="color-selector">
+      <p>Color</p>
+      <div class="color-options">
+        <div class="animator"></div>
+        <div class="color color1">Black</div>
+        <div class="color color2">Blue</div>
+      </div>
+    </div>
+    <div class="size-selector">
+      <p>Size</p>
+      <div class="size-options">
+        <div class="choose">Choose your size</div>
+        <div class="icon"><img src="{{'select-arrow.svg' | asset_url}}" alt=""></div>
+      </div>
+      <div class="size-dropdown"></div>
+    </div>
+    <button class="add-to-cart">
+      <span>ADD TO CART</span><img src="{{'arrow.svg' |  asset_url}}"></button>
+  </div>
+</div>
 
 <div class="grid-container">
   <div class="grid-sub-container">
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
-      <div><img src="{{'product-image-1.png' |  asset_url}}"></div>
+      <div id="product1"><img src="{{'product-image-1.png' |  asset_url}}"></div>
       <div><img src="{{'product-image-2.png' |  asset_url}}"></div>
       <div><img src="{{'product-image-3.png' |  asset_url}}"></div>
       <div><img src="{{'product-image-4.png' |  asset_url}}"></div>
@@ -13,6 +45,26 @@
     </div>
   </div>
 </div>
+
+<script>
+  const color1 = document.querySelector(".color1");
+  const color2 = document.querySelector(".color2");
+  const bar = document.querySelector(".animator");
+  
+  color2.addEventListener("click", ()=>{
+    bar.style.transform = "translateX(100%)";
+    color2.style.color = "#fff";
+    color1.style.color = "#000";
+  });
+  
+  color1.addEventListener("click", ()=>{
+    bar.style.transform = "translateX(0%)";
+    color1.style.color = "#fff";
+    color2.style.color = "#000";
+  });
+  
+  const product1 = document.getElementById('product1');
+</script>
 
 {% schema %}
   {
