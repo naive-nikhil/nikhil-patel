@@ -8,13 +8,12 @@
   <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
-    <button class="choose-gift-button">
-      <span>{{ section.settings.button-text }}</span><img src="{{'arrow.svg' |  asset_url}}"></button>
+    {%  render 'custom-button', text: 'choose gift', variant: 'secondary', id: 'nav-button' %}
   </nav>
   </div>
   <div id="nav-dropdown">
     <div class="tagline dropdown">{{ section.settings.tagline }}</div>
-    <button class="choose-gift-button dropdown"><span>{{ section.settings.button-text }}</span> <img id="dropdown-img" src="{{'arrow.svg' |  asset_url}}"></button>
+    {%  render 'custom-button', text: 'choose gift', variant: 'secondary' %}
   </div>
 </header>
 

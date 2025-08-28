@@ -1,6 +1,4 @@
 #hero-container {
-  margin: auto;
-  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -35,7 +33,6 @@
   padding-left: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .left-section {
@@ -51,37 +48,18 @@
   width: 1440px;
 }
 
-.left-section h1 {
+.left-section-2>h1 {
   font-size: clamp(2.4rem, 5vw, 4.8rem);;
   font-weight: 500;
+  margin-bottom: 2rem;
 }
 
-.left-section p {
-  margin-top: 2rem;
+.left-section-2>p {
   font-size: 1.3rem;
 }
 
-.left-section button {
+#hero-button{
   margin-top: 3rem;
-  width: fit-content;
-  background: black;
-  color: white;
-}
-
-.left-section button img{
-  filter: brightness(100);
-}
-
-.left-section button:hover{
-  color: black;
-}
-
-.left-section button:hover::after{
-  background: #fff544;
-}
-
-.left-section button:hover img{
-  filter: brightness(0);
 }
 
 #ribbon {
@@ -97,15 +75,12 @@
     display: none;
   }
 
-  .shop-now-btn{
-    display: flex;
+  #hero-button{
     position: absolute;
-    text-wrap: nowrap;
-    padding: 0.7rem 2rem;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 4;
+    z-index: 1;
   }
 
   .left-section{
