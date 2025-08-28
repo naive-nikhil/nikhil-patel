@@ -3,16 +3,16 @@
     "navbar": {
       "type": "navbar",
       "settings": {
-        "logo-text": "Tissio Vision",
+        "logo-text": "Tisso Vision",
         "tagline": "Find the ideal gift for your loved ones.",
         "button-text": "choose gift"
       }
     },
-    "banner": {
-      "type": "banner",
+    "hero": {
+      "type": "hero",
       "settings": {}
     }
   },
-  "order": ["navbar", "banner"],
+  "order": ["navbar", "hero"],
   "layout": "blank"
 }

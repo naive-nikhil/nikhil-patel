@@ -1,0 +1,88 @@
+#hero-container {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-container {
+  height: 100%;
+  max-height: 40vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.img-container img {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+}
+
+.content-container {
+  max-width: 1440px;
+  height: 54vh;
+  display: flex;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+}
+
+.right-section {
+  width: 20%;
+}
+
+.left-section h1 {
+  font-size: 4.8rem;
+  font-weight: 500;
+}
+
+.left-section p {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+}
+
+.left-section button {
+  margin-top: 3rem;
+  width: fit-content;
+}
+
+.right-section img {
+  width: 100vw;
+}
+
+#ribbon {
+  background: #f5f5f5;
+  text-align: center;
+  padding: 10px 0;
+  font-size: clamp(0.5rem, 5vw + 0.5rem, 3rem);
+  width: 100%;
+}
+
+@media only screen and (min-width: 1200px) {
+  .img-container {
+    max-height: 54vh;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .img-container {
+    display: none;
+  }
+
+  .content-container {
+    flex-direction: column;
+  }
+
+  .right-section {
+    object-position: center;
+  }
+}
