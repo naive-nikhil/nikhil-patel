@@ -1,12 +1,13 @@
 {{ 'section-grid.css' | asset_url | stylesheet_tag }}
 
+
 <div class="modal-container">
   <div class="modal">
     <div class="exit"><img src="{{'cross.svg' |  asset_url}}"></div>
     <div class="about">
       <div class="img-wrapper"><img src="{{'product-image-2.png' |  asset_url}}"></div>
       <div class="about-info">
-        <p class="product-title">Tailored Jacket</p>
+        <p class="product-title">Leather Jacket</p>
         <h2 class="product-price">980,00$</h2>
         <p class="product-description">This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.</p>
       </div>
@@ -45,12 +46,9 @@
   <div class="grid-sub-container">
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
-      <div class="product1"><img src="{{'product-image-1.png' |  asset_url}}"></div>
-      <div class="product1"><img src="{{'product-image-2.png' |  asset_url}}"></div>
-      <div class="product1"><img src="{{'product-image-3.png' |  asset_url}}"></div>
-      <div class="product1"><img src="{{'product-image-4.png' |  asset_url}}"></div>
-      <div class="product1"><img src="{{'product-image-5.png' |  asset_url}}"></div>
-      <div class="product1"><img src="{{'product-image-6.png' |  asset_url}}"></div>
+      {% for product in collections["frontpage"].products %}
+        <div class="product1"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -59,18 +57,18 @@
   const modal = document.querySelector(".modal-container");
   const products =  document.querySelectorAll(".product1");
   const closeModal = document.querySelector(".exit");
-
+  
   products.forEach(product => {
     product.addEventListener("click", ()=>{
       modal.style.display = "flex";
     })
   })
-
+  
   closeModal.addEventListener("click", ()=>{
     modal.style.display = "none";
   })
-
-
+  
+  
   const color1 = document.querySelector(".color1");
   const color2 = document.querySelector(".color2");
   const bar = document.querySelector(".animator");
