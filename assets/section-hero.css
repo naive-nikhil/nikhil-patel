@@ -93,6 +93,7 @@
     width: 100%;
     height: initial;
     overflow: hidden;
+    padding-top: 2rem;
   }
 
   .left-section-2{
