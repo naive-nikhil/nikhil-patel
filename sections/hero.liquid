@@ -24,6 +24,38 @@
 {% schema %}
   {
     "name": "Hero",
-    "settings": []
+    "settings": [
+      {
+        "type": "text",
+        "label": "Headline",
+        "id": "headline"
+      },
+      {
+        "type": "text",
+        "label": "Description",
+        "id": "description"
+      },
+      {
+        "type": "text",
+        "label": "Sub Description",
+        "id": "sub-description"
+      },
+      {
+        "type": "text",
+        "label": "CTA Text",
+        "id": "cta-text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero",
+        "settings": {
+          "headline": "The Gift Guide",
+          "description": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+          "sub-description": "Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+          "cta-text": "SHOP NOW"
+        }
+      }
+    ]
   }
 {% endschema %}
