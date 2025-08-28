@@ -29,10 +29,15 @@
   aspect-ratio: 1/1;
   overflow: hidden;
   cursor: pointer;
+  border: 1px solid #d3d3d3;
+}
+
+.collection div:hover{
+  border: 1px solid #a9a9a9;
 }
 
 .collection div:hover img {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .collection div img {
@@ -47,6 +52,7 @@
 @media only screen and (max-width: 992px) {
   .grid-sub-container {
     padding: 4rem 1rem;
+    padding-bottom: 2rem;
   }
   .grid-sub-container h1 {
     text-align: center;
