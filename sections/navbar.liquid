@@ -8,7 +8,7 @@
   <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
-    {%  render 'custom-button', text: 'choose gift', variant: 'secondary', id: 'nav-button' %}
+    {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary', id: 'nav-button' %}
   </nav>
   </div>
   <div id="nav-dropdown">
