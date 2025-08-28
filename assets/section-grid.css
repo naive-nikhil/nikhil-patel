@@ -8,13 +8,13 @@
   width: 100dvw;
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 
 .modal {
-  /* overflow: hidden; */
+  margin: 1rem;
   width: 400px;
   background: #fff;
   padding: 2rem 1.5rem;
@@ -25,6 +25,7 @@
 .exit {
   display: flex;
   justify-content: end;
+  margin-bottom: 1rem;
 }
 
 .exit img {
@@ -36,9 +37,12 @@
   gap: 1rem;
 }
 
+
+
 .img-wrapper {
   width: 50%;
   overflow: hidden;
+  border: 1px solid #d3d3d3;
 }
 
 .img-wrapper img {
@@ -91,6 +95,39 @@
 
 .size-selector {
   margin-top: 1rem;
+  position: relative;
+}
+
+.size-dropdown{
+  position: absolute;
+  display: flex;
+  width: calc(100% - 2px);
+  flex-direction: column;
+  border: 1px solid black;
+  border-top: 0;
+  transform: translateY(-1px);
+  background: #fff;
+  height: 0;
+  max-height: 144px;
+  overflow: auto;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.size-dropdown::-webkit-scrollbar{
+  display: none;
+}
+
+.size-option{
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+}
+
+.size-option:hover{
+  background: #000;
+  color: #fff;
 }
 
 .size-options {
@@ -110,6 +147,10 @@
   width: fit-content;
   border-left: 0;
   cursor: pointer;
+}
+
+.icon img{
+  transition: all 0.3s ease-in-out;
 }
 
 .color-options .animator {
@@ -145,14 +186,14 @@
   content: "";
   height: 100%;
   background-color: #000;
-  width: 10px;
+  width: 5px;
   position: absolute;
   top: 0;
   left: 0;
 }
 
 .color:nth-child(3)::after {
-  background-color: blue;
+  background-color: #0D499F;
 }
 
 .add-to-cart {
@@ -233,5 +274,21 @@
   }
   .collection {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .about{
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .img-wrapper{
+    width: 100px;
+  }
+
+  .about-info{
+    width: 100%;
+    gap: 1rem;
   }
 }

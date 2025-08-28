@@ -23,9 +23,18 @@
       <p>Size</p>
       <div class="size-options">
         <div class="choose">Choose your size</div>
-        <div class="icon"><img src="{{'select-arrow.svg' | asset_url}}" alt=""></div>
+        <div class="icon"><img
+            class="select-arrow"
+            src="{{'select-arrow.svg' | asset_url}}"
+            alt=""></div>
       </div>
-      <div class="size-dropdown"></div>
+      <div class="size-dropdown">
+        <div class="size-option">XS</div>
+        <div class="size-option">S</div>
+        <div class="size-option">M</div>
+        <div class="size-option">L</div>
+        <div class="size-option">XL</div>
+      </div>
     </div>
     <button class="add-to-cart">
       <span>ADD TO CART</span><img src="{{'arrow.svg' |  asset_url}}"></button>
@@ -36,17 +45,32 @@
   <div class="grid-sub-container">
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
-      <div id="product1"><img src="{{'product-image-1.png' |  asset_url}}"></div>
-      <div><img src="{{'product-image-2.png' |  asset_url}}"></div>
-      <div><img src="{{'product-image-3.png' |  asset_url}}"></div>
-      <div><img src="{{'product-image-4.png' |  asset_url}}"></div>
-      <div><img src="{{'product-image-5.png' |  asset_url}}"></div>
-      <div><img src="{{'product-image-6.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-1.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-2.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-3.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-4.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-5.png' |  asset_url}}"></div>
+      <div class="product1"><img src="{{'product-image-6.png' |  asset_url}}"></div>
     </div>
   </div>
 </div>
 
 <script>
+  const modal = document.querySelector(".modal-container");
+  const products =  document.querySelectorAll(".product1");
+  const closeModal = document.querySelector(".exit");
+
+  products.forEach(product => {
+    product.addEventListener("click", ()=>{
+      modal.style.display = "flex";
+    })
+  })
+
+  closeModal.addEventListener("click", ()=>{
+    modal.style.display = "none";
+  })
+
+
   const color1 = document.querySelector(".color1");
   const color2 = document.querySelector(".color2");
   const bar = document.querySelector(".animator");
@@ -63,7 +87,41 @@
     color2.style.color = "#000";
   });
   
-  const product1 = document.getElementById('product1');
+  const sizeSelectorButton = document.querySelector(".icon");
+  const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
+  const sizeSelectorDropdown = document.querySelector(".size-dropdown");
+  const sizeOptions = document.querySelectorAll(".size-option");
+  const choose = document.querySelector(".choose");
+  
+  sizeOptions.forEach(option => {
+    option.addEventListener("click", ()=>{
+      sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+      toggleDropdown();
+      choose.innerText = option.innerText;
+    })
+  })
+  
+  
+  let sizeSelectorDropdownIsOpen = false;
+  
+  function toggleDropdown(){
+  if(sizeSelectorDropdownIsOpen){
+      choose.innerText = "Choose your size"
+      sizeSelectorButtonIcon.style.transform = "rotate(-180deg)";
+      sizeSelectorDropdown.style.height = "200%";
+      sizeSelectorDropdown.style.transform = "translateY(0)";
+    }else{
+      choose.innerText = "Choose your size"
+      sizeSelectorButtonIcon.style.transform = "rotate(0)";
+      sizeSelectorDropdown.style.height = "0";
+      sizeSelectorDropdown.style.transform = "translateY(-1px)";
+    }
+  }
+  
+  sizeSelectorButton.addEventListener("click", ()=>{
+    sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+    toggleDropdown();
+  })
 </script>
 
 {% schema %}
