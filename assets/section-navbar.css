@@ -15,17 +15,25 @@ header {
   display: none;
   height: 0;
   overflow: hidden;
-  z-index: -1;
+  z-index: 2;
   transition: all 300ms ease-in-out;
 }
 
-#menu-icon {
+#menu-toggle{
   display: none;
   position: absolute;
+  left: 0;
+  height: 100%;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+  z-index: 4;
+}
+
+#menu-icon{
   height: 100%;
   padding: 0 2rem;
   width: 2rem;
-  transition: all 300ms ease-in-out;
+  width: 2rem;
 }
 
 .nav-container {
@@ -33,6 +41,7 @@ header {
   width: 100%;
   margin: auto;
   height: 64px;
+  z-index: 3;
 }
 
 nav {
@@ -41,7 +50,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 0;
 }
 
 .logo {
@@ -119,8 +127,11 @@ nav {
     gap: 1rem;
   }
 
-  #menu-icon {
+  #menu-toggle {
     display: block;
+  }
+
+  #menu-icon{
     padding: 0 1rem;
     width: 1.5rem;
   }
@@ -129,9 +140,12 @@ nav {
     font-size: 1.6rem;
   }
 
+  .nav-container{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
   nav {
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
 }
 

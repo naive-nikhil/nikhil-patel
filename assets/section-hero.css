@@ -101,6 +101,7 @@
     display: flex;
     position: absolute;
     text-wrap: nowrap;
+    padding: 0.7rem 2rem;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
