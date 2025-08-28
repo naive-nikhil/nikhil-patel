@@ -1,6 +1,9 @@
 header {
   position: relative;
   background: #f5f5f5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #nav-dropdown {
@@ -25,14 +28,19 @@ header {
   transition: all 300ms ease-in-out;
 }
 
-nav {
+.nav-container {
   max-width: 1440px;
-  height: 64px;
+  width: 100%;
   margin: auto;
-  padding: 0 2rem;
+  height: 64px;
+}
+
+nav {
+  height: 100%;
+  padding: 0 4rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   z-index: 0;
 }
 

@@ -4,12 +4,14 @@
   <div id="menu-toggle">
     <img src="{{'menu.svg' |  asset_url}}" id="menu-icon">
   </div>
+  <div class="nav-container">
   <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
     <button class="choose-gift-button">
       <span>{{ section.settings.button-text }}</span><img src="{{'arrow.svg' |  asset_url}}"></button>
   </nav>
+  </div>
   <div id="nav-dropdown">
     <div class="tagline dropdown">{{ section.settings.tagline }}</div>
     <button class="choose-gift-button dropdown"><span>{{ section.settings.button-text }}</span> <img id="dropdown-img" src="{{'arrow.svg' |  asset_url}}"></button>
