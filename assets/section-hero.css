@@ -24,17 +24,23 @@
 }
 
 .content-container {
+  margin: auto;
   max-width: 1440px;
   overflow: hidden;
   height: 400px;
   display: flex;
 }
 
-.left-section {
+.left-section-2{
+  padding-left: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 38%;
+}
+
+.left-section {
+  width: 540px;
+
 }
 
 .right-section {
@@ -46,7 +52,7 @@
 }
 
 .left-section h1 {
-  font-size: 4.8rem;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);;
   font-weight: 500;
 }
 
@@ -70,8 +76,6 @@
   color: black;
 }
 
-
-
 .left-section button:hover::after{
   background: #fff544;
 }
@@ -88,22 +92,44 @@
   width: 100%;
 }
 
-@media only screen and (min-width: 1200px) {
-  .img-container {
-    max-height: 54vh;
-  }
-}
-
 @media only screen and (max-width: 992px) {
   .img-container {
     display: none;
   }
 
-  .content-container {
-    flex-direction: column;
+  .shop-now-btn{
+    /* display: block; */
+    position: absolute;
   }
 
-  .right-section {
-    object-position: center;
+  .left-section{
+    width: 100%;
+  }
+
+  .left-section-2{
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .left-section p{
+    margin-top: 1rem;
+  }
+
+  .left-section p span{
+    display: none;
+  }
+
+  .content-container {
+    max-width: 992px;
+    width: 100%;
+    flex-direction: column;
+    height: initial;
+  }
+
+  .right-section{
+  }
+  
+  .right-section img {
+    height: 410px;
   }
 }

@@ -36,6 +36,7 @@ header {
 }
 
 nav {
+  padding: 0 2rem;
   height: 100%;
   display: flex;
   justify-content: space-between;
