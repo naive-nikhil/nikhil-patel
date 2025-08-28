@@ -5,6 +5,7 @@
   margin: 0;
   border: 0;
   /* outline: 1px solid black; */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .custom-btn{
