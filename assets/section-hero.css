@@ -127,9 +127,14 @@
   }
 
   .right-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   
   .right-section img {
+    width: initial;
     height: 410px;
   }
 }
