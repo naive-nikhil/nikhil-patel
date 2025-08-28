@@ -7,7 +7,7 @@
   height: 100dvh;
   width: 100dvw;
   z-index: 50;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
   display: none;
