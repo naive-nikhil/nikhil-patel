@@ -293,8 +293,20 @@
   }
 
   .about-info{
+    position: relative;
     width: 100%;
     gap: 1rem;
+  }
+
+  .product-title{
+    max-width: 60%;
+  }
+
+  .product-price{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.3rem;
   }
 
   .add-to-cart{
