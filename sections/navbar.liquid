@@ -29,12 +29,11 @@
   let isOpen = false;
   
   menuToggle.addEventListener("click", () => {
-    console.log('I am clicked!')
     isOpen = !isOpen;
   
     if(isOpen){
       menuIcon.src = crossIconSrc;
-      navDropdown.style.height = "150px";
+      navDropdown.style.height = "160px";
     } else {
       menuIcon.src = menuIconSrc;
       navDropdown.style.height = "0px";

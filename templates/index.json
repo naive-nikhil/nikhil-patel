@@ -11,8 +11,12 @@
     "hero": {
       "type": "hero",
       "settings": {}
+    },
+    "grid": {
+      "type": "grid",
+      "settings": {}
     }
   },
-  "order": ["navbar", "hero"],
+  "order": ["navbar", "hero", "grid"],
   "layout": "blank"
 }

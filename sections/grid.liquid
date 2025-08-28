@@ -1,1 +1,22 @@
-<h1>Grid</h1>
+{{'section-grid.css' |  asset_url |  stylesheet_tag}}
+
+<div class="grid-container">
+  <div class="grid-sub-container">
+    <h1>Tisso Vision in the wild</h1>
+    <div class="collection">
+      <div><img src="{{'product-image-1.svg' |  asset_url}}"></div>
+      <div><img src="{{'product-image-2.png' |  asset_url}}"></div>
+      <div><img src="{{'product-image-3.png' |  asset_url}}"></div>
+      <div><img src="{{'product-image-4.png' |  asset_url}}"></div>
+      <div><img src="{{'product-image-5.png' |  asset_url}}"></div>
+      <div><img src="{{'product-image-6.png' |  asset_url}}"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Grid",
+    "settings": []
+  }
+{% endschema %}
