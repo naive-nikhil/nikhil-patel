@@ -173,12 +173,11 @@
   flex-direction: column;
   border: 1px solid black;
   border-top: 0;
-  transform: translateY(-1px);
   background: #fff;
   height: 0;
-  max-height: 144px;
+  max-height: 100px;
   overflow: auto;
-  z-index: 1;
+  z-index: 2;
   transition: all 0.3s ease-in-out;
 }
 

@@ -28,7 +28,7 @@
         <div class="product-modal__size-placeholder">Choose your size</div>
         <div class="product-modal__size-toggle"><img class="product-modal__size-toggle-icon" src="{{'select-arrow.svg' | asset_url}}"></div>
       </div>
-      <div class="product-modal__size-dropdown"></div>
+      <div class="product-modal__size-dropdown" data-isOpen="false"></div>
     </div>
     {%  render 'custom-button' text: 'Add To Cart', variant: 'primary', id: 'product-modal__add-to-cart' %}
   </div>
@@ -69,16 +69,33 @@
     modalEls.title.textContent = productData.title;
     modalEls.price.textContent = `${(productData.price/100).toFixed(2)} €`;
     modalEls.description.innerHTML = productData.description;
+
+    renderSizes(productData.variants);
+  }
+
+  function toggleDropdown({open, el, icon} = {}){
+    let isOpen = el.dataset.isOpen === "true";
+    isOpen = open ?? !isOpen;
+    el.style.height = isOpen ? "200%" : "0";
+    if(icon){
+      icon.style.transform = isOpen ? "rotate(-180deg)" : "rotate(0)";
+    }
+
+    el.dataset.isOpen = isOpen;
   }
 
   function renderSizes(variants){
     const sizes = [...new Set(variants.map(v=>v.option1).filter(Boolean))];
-
+    sizeEls.dropdown.innerHTML = sizes.map(size=>`<div class='product-modal__size-option'>${size}</div>`).join("");
   }
 
   function closeModal(){
     modalEls.container.style.display = "none";
   }
+
+  sizeEls.button.addEventListener("click", ()=>{
+    toggleDropdown({el: sizeEls.dropdown, icon: sizeEls.icon});
+  })
 
   document.querySelectorAll(".product-grid__item").forEach((productEl)=>{
     productEl.addEventListener("click", ()=>{
