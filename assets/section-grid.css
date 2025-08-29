@@ -107,18 +107,19 @@
   width: 100%;
   border: 1px solid black;
   border-bottom: 2px solid black;
-  border-left: 0;
   border-right: 0;
   padding: 10px 20px;
+  z-index: 1;
+  color: #000;
   position: relative;
   transition: all 0.2s ease-in-out;
 }
 
-.product-modal__color-option--1 {
+.product-modal__color-option:first-child{
   color: #fff;
 }
 
-.product-modal__color-option--2 {
+.product-modal__color-options:last-child{
   border-right: 1px solid black;
 }
 
@@ -129,13 +130,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #000;
   border-right: 1px solid black;
-  border-left: 1px solid black;
+  background: #fff;
 }
 
-.product-modal__color-option:nth-child(3)::after{
-  background: #fff;
+.product-modal__color-option:first-child::after {
+  background: #000;
 }
 
 .product-modal__size-picker {

@@ -20,8 +20,6 @@
       <p class="product-modal__label">Color</p>
       <div class="product-modal__color-options">
         <div class="product-modal__color-indicator"></div>
-        <div class="product-modal__color-option product-modal__color-option--1"></div>
-        <div class="product-modal__color-option product-modal__color-option--2"></div>
       </div>
     </div>
     <div class="product-modal__size-picker">
@@ -60,6 +58,7 @@
     title: document.querySelector('.product-modal__title'),
     price: document.querySelector('.product-modal__price'),
     description: document.querySelector('.product-modal__description'),
+    cartButton: document.querySelector('#product-modal__add-to-cart')
   };
 
   const sizeEls = {
@@ -73,6 +72,12 @@
     colorOptions: document.querySelector('.product-modal__color-options'),
     colorDivs: document.querySelectorAll('.product-modal__color-option'),
     indicator: document.querySelector('.product-modal__color-indicator'),
+  };
+
+  const state = {
+    currentProductData: null,
+    selectedSize: null,
+    selectedColor: null
   };
 
   function openModal(productData) {
@@ -100,22 +105,46 @@
 
   function renderColors(variants) {
     const colors = [...new Set(variants.map((v) => v.option2).filter(Boolean))];
-    colors.forEach((color, index) => {
-      if (colorEls.colorDivs[index]) {
-        colorEls.colorDivs[index].textContent = color;
-      }
-    });
+    colorEls.colorOptions.innerHTML = colors.map((color)=> `<div class="product-modal__color-option" data-color="${color}">${color}</div>`).join('');
+    colorEls.colorOptions.appendChild(colorEls.indicator);
   }
 
   function renderSizes(variants) {
     const sizes = [...new Set(variants.map((v) => v.option1).filter(Boolean))];
-    sizeEls.dropdown.innerHTML = sizes.map((size) => `<div class='product-modal__size-option'>${size}</div>`).join('');
+    sizeEls.dropdown.innerHTML = sizes.map((size) => `<div class='product-modal__size-option' data-selected="" data-size="${size}">${size}</div>`).join('');
   }
 
   function closeModal() {
     modalEls.container.style.display = 'none';
     document.body.style.overflow = '';
   }
+
+  const addToCart = async ({variantId, quantity}={})=>{
+    try {
+      const res = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id: variantId, quantity: quantity})
+      });
+
+      const data = await res.json();
+      console.log("Added to Cart", data);
+      alert("Added to Cart");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function handleAddToCart(){
+    const currentVariant = [];
+    currentVariant.push(state.selectedSize, state.selectedColor);
+
+    const selectedVariant = state.currentProductData.variants.find(variant=>variant.options.length === currentVariant.length && variant.options.every((val, idx)=> val === currentVariant[idx])).id;
+
+    addToCart({variantId: selectedVariant});
+    closeModal();
+  }
+  
 
   modalEls.closeButton.addEventListener('click', () => {
     toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
@@ -126,29 +155,36 @@
     toggleDropdown({ el: sizeEls.dropdown, icon: sizeEls.icon });
     sizeEls.placholder.textContent = 'Choose your size';
   });
+
   sizeEls.dropdown.addEventListener('click', (e) => {
     if (e.target.classList.contains('product-modal__size-option')) {
-      sizeEls.placholder.textContent = e.target.textContent;
+      sizeEls.placholder.textContent = e.target.dataset.size;
+      state.selectedSize = e.target.dataset.size;
       toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
     }
   });
 
   colorEls.colorOptions.addEventListener('click', (e) => {
-    if (e.target.classList.contains('product-modal__color-option--2')) {
-      colorEls.indicator.style.transform = 'translateX(100%)';
-      colorEls.colorDivs[1].style.color = '#fff';
-      colorEls.colorDivs[0].style.color = '#000';
-    } else if (e.target.classList.contains('product-modal__color-option--1')) {
-      colorEls.indicator.style.transform = 'translateX(0)';
-      colorEls.colorDivs[0].style.color = '#fff';
-      colorEls.colorDivs[1].style.color = '#000';
+    if (e.target.classList.contains('product-modal__color-option')) {
+      state.selectedColor = e.target.dataset.color;
+      const options = [...colorEls.colorOptions.querySelectorAll('.product-modal__color-option')];
+      const index = options.indexOf(e.target);
+
+      options.forEach(opt=>opt.style.color="#000");
+      e.target.style.color = "#fff";
+
+      colorEls.indicator.style.transform = `translateX(${index*100}%)`;
     }
   });
 
+  modalEls.cartButton.addEventListener("click", ()=>{
+    handleAddToCart();
+  })
+
   document.querySelectorAll('.product-grid__item').forEach((productEl) => {
     productEl.addEventListener('click', () => {
-      const data = JSON.parse(productEl.dataset.product);
-      openModal(data);
+      state.currentProductData = JSON.parse(productEl.dataset.product);
+      openModal(state.currentProductData);
     });
   });
 </script>
