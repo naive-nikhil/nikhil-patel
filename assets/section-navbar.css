@@ -122,6 +122,12 @@ nav {
   nav {
     justify-content: center;
   }
+
+  .navbar__cart-icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
