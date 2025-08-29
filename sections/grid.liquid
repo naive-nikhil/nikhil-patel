@@ -3,7 +3,7 @@
 {% comment %} Modal for product popup {% endcomment %}
 <div class="product-modal">
   <div class="product-modal__dialog">
-    <button class="product-modal__close" onclick="closeModal()"><img src="{{'cross.svg' |  asset_url}}"></button>
+    <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
     <div class="product-modal__body">
       <div class="product-modal__image-wrapper">
         <img class="product-modal__image" src="{{'product-image-2.png' |  asset_url}}">
@@ -48,6 +48,7 @@
 
 <script>
   const modalEls = {
+    closeButton: document.querySelector(".product-modal__close"),
     container: document.querySelector(".product-modal"),
     image: document.querySelector(".product-modal__image"),
     title: document.querySelector(".product-modal__title"),
@@ -60,6 +61,10 @@
     button: document.querySelector(".product-modal__size-toggle"),
     icon: document.querySelector(".product-modal__size-toggle-icon"),
     dropdown: document.querySelector(".product-modal__size-dropdown")
+  }
+
+  const colorEls = {
+    colorDivs: document.querySelectorAll(".product-modal__color-option");
   }
 
   function openModal(productData){
@@ -80,8 +85,12 @@
     if(icon){
       icon.style.transform = isOpen ? "rotate(-180deg)" : "rotate(0)";
     }
-
     el.dataset.isOpen = isOpen;
+  }
+
+  function renderColors(variants){
+    const colors = [...new Set(variants.map(v=>v.option2).filter(Boolean))];
+
   }
 
   function renderSizes(variants){
@@ -92,6 +101,11 @@
   function closeModal(){
     modalEls.container.style.display = "none";
   }
+
+  modalEls.closeButton.addEventListener("click", ()=>{
+    toggleDropdown({open: false, el: sizeEls.dropdown, icon: sizeEls.icon})
+    closeModal()
+  })
 
   sizeEls.button.addEventListener("click", ()=>{
     toggleDropdown({el: sizeEls.dropdown, icon: sizeEls.icon});
