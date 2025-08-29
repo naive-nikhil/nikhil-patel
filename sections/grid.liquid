@@ -1,9 +1,9 @@
 {{ 'section-grid.css' | asset_url | stylesheet_tag }}
 
-{% comment %} Modal For Product Pop Up {% endcomment %}
+{% comment %} Modal for product popup {% endcomment %}
 <div class="product-modal">
   <div class="product-modal__dialog">
-    <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
+    <button class="product-modal__close" onclick="closeModal()"><img src="{{'cross.svg' |  asset_url}}"></button>
     <div class="product-modal__body">
       <div class="product-modal__image-wrapper">
         <img class="product-modal__image" src="{{'product-image-2.png' |  asset_url}}">
@@ -34,128 +34,159 @@
   </div>
 </div>
 
-{% comment %} Main Grid for Collection of Products {% endcomment %}
-<div class="grid-container">
-  <div class="grid-sub-container">
-    <h1>Tisso Vision in the wild</h1>
-    <div class="collection">
+{% comment %} Main grid for showcasing collection of products {% endcomment %}
+<div class="product-grid">
+  <div class="product-grid__content">
+    <h1 class="product-grid__title">Tisso Vision in the wild</h1>
+    <div class="product-grid__list">
       {% for product in collections["frontpage"].products %}
-        <div class="product1" data-product="{{ product | json |  escape }}"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
+        <div class="product-grid__item" data-product="{{ product | json |  escape }}"><img class="product-grid__image" src="{{ product.featured_image | img_url: '600x' }}"></div>
       {% endfor %}
     </div>
   </div>
 </div>
 
 <script>
-  const modal = document.querySelector(".modal-container");
-  const products =  document.querySelectorAll(".product1");
-  const closeModal = document.querySelector(".exit");
-  
-  const productImage = document.querySelector(".product-img");
-  const productTitle = document.querySelector(".product-title");
-  const productPrice = document.querySelector(".product-price");
-  const productDescription = document.querySelector(".product-description");
-  
-  const sizeSelectorButton = document.querySelector(".icon");
-  const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
-  const sizeSelectorDropdown = document.querySelector(".size-dropdown");
-  const sizeOptions = document.querySelectorAll(".size-option");
-  const choose = document.querySelector(".choose");
-  
-  const colorOptions = document.querySelector(".color-options")
-  const color1 = document.querySelector(".color1");
-  const color2 = document.querySelector(".color2");
-  
-  const colorDivs = document.querySelectorAll(".color1, .color2");
-  
-  const bar = document.querySelector(".animator");
-  
-  products.forEach(product => {
-    product.addEventListener("click", ()=>{
-      const data = JSON.parse(product.dataset.product);
-  
-      const variants = data.variants;
-  
-      const sizes = [...new Set(variants.map(v => v.option1).filter(Boolean))];
-      const colors = [...new Set(variants.map(v => v.option2).filter(Boolean))];
-  
-      modal.style.display = "flex";
-      productImage.src = data.featured_image;
-      productTitle.textContent = data.title;
-      productPrice.textContent = `${(data.price/100).toFixed(2)} €`;
-      productDescription.innerHTML = data.description;
-  
-      sizeSelectorDropdown.innerHTML = "";
-  
-      sizes.forEach(size => {
-        const div = document.createElement("div");
-        div.classList.add("product-modal__size-option");
-        div.textContent = size;
-        sizeSelectorDropdown.appendChild(div);
-      });
-  
-      colors.forEach((color, index)=>{
-        if(colorDivs[index]){
-          colorDivs[index].textContent = color;
-        }
-      })
-    })
-  })
-  
-  closeModal.addEventListener("click", ()=>{
-    modal.style.display = "none";
-  })
-  
-  
-  color2.addEventListener("click", ()=>{
-    bar.style.transform = "translateX(100%)";
-    color2.style.color = "#fff";
-    color1.style.color = "#000";
-  })
-  
-  color1.addEventListener("click", ()=>{
-    bar.style.transform = "translateX(0%)";
-    color1.style.color = "#fff";
-    color2.style.color = "#000";
-  })
-  
-  sizeSelectorDropdown.addEventListener("click", (e)=>{
-      if(e.target.classList.contains("product-modal__size-option")){
-        sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
-        toggleDropdown();
-        choose.innerText = e.target.innerText;
-      }
-  })
-  
-  sizeOptions.forEach(option => {
-    option.addEventListener("click", ()=>{
-      sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
-      toggleDropdown();
-      choose.innerText = option.innerText;
-    })
-  })
-  
-  
-  let sizeSelectorDropdownIsOpen = false;
-  
-  function toggleDropdown(){
-  if(sizeSelectorDropdownIsOpen){
-      choose.innerText = "Choose your size"
-      sizeSelectorButtonIcon.style.transform = "rotate(-180deg)";
-      sizeSelectorDropdown.style.height = "200%";
-      sizeSelectorDropdown.style.transform = "translateY(0)";
-    }else{
-      choose.innerText = "Choose your size"
-      sizeSelectorButtonIcon.style.transform = "rotate(0)";
-      sizeSelectorDropdown.style.height = "0";
-      sizeSelectorDropdown.style.transform = "translateY(-1px)";
-    }
+  const modalEls = {
+    container: document.querySelector(".product-modal"),
+    image: document.querySelector(".product-modal__image"),
+    title: document.querySelector(".product-modal__title"),
+    price: document.querySelector(".product-modal__price"),
+    description: document.querySelector(".product-modal__description")
   }
-  
-  sizeSelectorButton.addEventListener("click", ()=>{
-    sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
-    toggleDropdown();
+
+  const sizeEls = {
+    placholder: document.querySelector(".product-modal__size-placeholder"),
+    button: document.querySelector(".product-modal__size-toggle"),
+    icon: document.querySelector(".product-modal__size-toggle-icon"),
+    dropdown: document.querySelector(".product-modal__size-dropdown")
+  }
+
+  function openModal(productData){
+    modalEls.container.style.display = "flex";
+
+    modalEls.image.src = productData.featured_image;
+    modalEls.title.textContent = productData.title;
+    modalEls.price.textContent = `${(productData.price/100).toFixed(2)} €`;
+    modalEls.description.innerHTML = productData.description;
+  }
+
+  function renderSizes(variants){
+    const sizes = [...new Set(variants.map(v=>v.option1).filter(Boolean))];
+
+  }
+
+  function closeModal(){
+    modalEls.container.style.display = "none";
+  }
+
+  document.querySelectorAll(".product-grid__item").forEach((productEl)=>{
+    productEl.addEventListener("click", ()=>{
+      const data = JSON.parse(productEl.dataset.product);
+      openModal(data);
+    })
   })
+  
+  // const sizeSelectorButton = document.querySelector(".icon");
+  // const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
+  // const sizeSelectorDropdown = document.querySelector(".size-dropdown");
+  // const sizeOptions = document.querySelectorAll(".size-option");
+  // const choose = document.querySelector(".choose");
+  
+  // const colorOptions = document.querySelector(".color-options")
+  // const color1 = document.querySelector(".color1");
+  // const color2 = document.querySelector(".color2");
+  
+  // const colorDivs = document.querySelectorAll(".color1, .color2");
+  
+  // const bar = document.querySelector(".animator");
+  
+  // products.forEach(product => {
+  //   product.addEventListener("click", ()=>{
+  //     const data = JSON.parse(product.dataset.product);
+  
+  //     const variants = data.variants;
+  
+  //     const sizes = [...new Set(variants.map(v => v.option1).filter(Boolean))];
+  //     const colors = [...new Set(variants.map(v => v.option2).filter(Boolean))];
+  
+  //     modal.style.display = "flex";
+  //     productImage.src = data.featured_image;
+  //     productTitle.textContent = data.title;
+  //     productPrice.textContent = `${(data.price/100).toFixed(2)} €`;
+  //     productDescription.innerHTML = data.description;
+  
+  //     sizeSelectorDropdown.innerHTML = "";
+  
+  //     sizes.forEach(size => {
+  //       const div = document.createElement("div");
+  //       div.classList.add("product-modal__size-option");
+  //       div.textContent = size;
+  //       sizeSelectorDropdown.appendChild(div);
+  //     });
+  
+  //     colors.forEach((color, index)=>{
+  //       if(colorDivs[index]){
+  //         colorDivs[index].textContent = color;
+  //       }
+  //     })
+  //   })
+  // })
+  
+  // closeModal.addEventListener("click", ()=>{
+  //   modal.style.display = "none";
+  // })
+  
+  
+  // color2.addEventListener("click", ()=>{
+  //   bar.style.transform = "translateX(100%)";
+  //   color2.style.color = "#fff";
+  //   color1.style.color = "#000";
+  // })
+  
+  // color1.addEventListener("click", ()=>{
+  //   bar.style.transform = "translateX(0%)";
+  //   color1.style.color = "#fff";
+  //   color2.style.color = "#000";
+  // })
+  
+  // sizeSelectorDropdown.addEventListener("click", (e)=>{
+  //     if(e.target.classList.contains("product-modal__size-option")){
+  //       sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+  //       toggleDropdown();
+  //       choose.innerText = e.target.innerText;
+  //     }
+  // })
+  
+  // sizeOptions.forEach(option => {
+  //   option.addEventListener("click", ()=>{
+  //     sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+  //     toggleDropdown();
+  //     choose.innerText = option.innerText;
+  //   })
+  // })
+  
+  
+  // let sizeSelectorDropdownIsOpen = false;
+  
+  // function toggleDropdown(){
+  // if(sizeSelectorDropdownIsOpen){
+  //     choose.innerText = "Choose your size"
+  //     sizeSelectorButtonIcon.style.transform = "rotate(-180deg)";
+  //     sizeSelectorDropdown.style.height = "200%";
+  //     sizeSelectorDropdown.style.transform = "translateY(0)";
+  //   }else{
+  //     choose.innerText = "Choose your size"
+  //     sizeSelectorButtonIcon.style.transform = "rotate(0)";
+  //     sizeSelectorDropdown.style.height = "0";
+  //     sizeSelectorDropdown.style.transform = "translateY(-1px)";
+  //   }
+  // }
+  
+  // sizeSelectorButton.addEventListener("click", ()=>{
+  //   sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+  //   toggleDropdown();
+  // })
 </script>
 
 {% schema %}
