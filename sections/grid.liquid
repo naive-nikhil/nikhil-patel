@@ -2,160 +2,175 @@
 
 {% comment %} Modal for product popup {% endcomment %}
 <div class="product-modal">
-  <div class="product-modal__dialog">
-    <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
-    <div class="product-modal__body">
-      <div class="product-modal__image-wrapper">
-        <img class="product-modal__image" src="{{'product-image-2.png' |  asset_url}}">
-      </div>
-      <div class="product-modal__details">
-        <p class="product-modal__title">Leather Jacket</p>
-        <h2 class="product-modal__price">980,00$</h2>
-        <p class="product-modal__description">
-          This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.
-        </p>
-      </div>
-    </div>
-    <div class="product-modal__color-picker">
-      <p class="product-modal__label">Color</p>
-      <div class="product-modal__color-options">
-        <div class="product-modal__color-indicator"></div>
-        <div class="product-modal__color-option product-modal__color-option--1"></div>
-        <div class="product-modal__color-option product-modal__color-option--2"></div>
-      </div>
-    </div>
-    <div class="product-modal__size-picker">
-      <p class="product-modal__label">Size</p>
-      <div class="product-modal__size-options">
-        <div class="product-modal__size-placeholder">Choose your size</div>
-        <div class="product-modal__size-toggle">
-          <img class="product-modal__size-toggle-icon" src="{{'select-arrow.svg' | asset_url}}">
+    <div class="product-modal__dialog">
+        <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
+        <div class="product-modal__body">
+            <div class="product-modal__image-wrapper">
+                <img class="product-modal__image" src="{{'product-image-2.png' |  asset_url}}">
+            </div>
+            <div class="product-modal__details">
+                <p class="product-modal__title">Leather Jacket</p>
+                <h2 class="product-modal__price">980,00$</h2>
+                <p class="product-modal__description">
+                    This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.
+                </p>
+            </div>
         </div>
-      </div>
-      <div class="product-modal__size-dropdown" data-isOpen="false"></div>
+        <div class="product-modal__color-picker">
+            <p class="product-modal__label">Color</p>
+            <div class="product-modal__color-options">
+                <div class="product-modal__color-indicator"></div>
+                <div class="product-modal__color-option product-modal__color-option--1"></div>
+                <div class="product-modal__color-option product-modal__color-option--2"></div>
+            </div>
+        </div>
+        <div class="product-modal__size-picker">
+            <p class="product-modal__label">Size</p>
+            <div class="product-modal__size-options">
+                <div class="product-modal__size-placeholder">Choose your size</div>
+                <div class="product-modal__size-toggle">
+                    <img class="product-modal__size-toggle-icon" src="{{'select-arrow.svg' | asset_url}}">
+                </div>
+            </div>
+            <div class="product-modal__size-dropdown" data-isOpen="false"></div>
+        </div>
+        {% render 'custom-button', text: 'Add To Cart', variant: 'primary', id: 'product-modal__add-to-cart' %}
     </div>
-    {% render 'custom-button', text: 'Add To Cart', variant: 'primary', id: 'product-modal__add-to-cart' %}
-  </div>
 </div>
 
 {% comment %} Main grid for showcasing collection of products {% endcomment %}
 <div class="product-grid">
-  <div class="product-grid__content">
-    <h1 class="product-grid__title">Tisso Vision in the wild</h1>
-    <div class="product-grid__list">
-      {% for product in collections.frontpage.products %}
-        <div class="product-grid__item" data-product="{{ product | json |  escape }}">
-          <img class="product-grid__image" src="{{ product.featured_image | img_url: '600x' }}">
+    <div class="product-grid__content">
+        <h1 class="product-grid__title">Tisso Vision in the wild</h1>
+        <div class="product-grid__list">
+            {% for product in collections.frontpage.products %}
+            <div class="product-grid__item" data-product="{{ product | json |  escape }}">
+                <img class="product-grid__image" src="{{ product.featured_image | img_url: '600x' }}">
+            </div>
+            {% endfor %}
         </div>
-      {% endfor %}
     </div>
-  </div>
 </div>
 
 <script>
-  const modalEls = {
-    closeButton: document.querySelector('.product-modal__close'),
-    container: document.querySelector('.product-modal'),
-    image: document.querySelector('.product-modal__image'),
-    title: document.querySelector('.product-modal__title'),
-    price: document.querySelector('.product-modal__price'),
-    description: document.querySelector('.product-modal__description'),
-  };
+    const modalEls = {
+        closeButton: document.querySelector('.product-modal__close'),
+        container: document.querySelector('.product-modal'),
+        image: document.querySelector('.product-modal__image'),
+        title: document.querySelector('.product-modal__title'),
+        price: document.querySelector('.product-modal__price'),
+        description: document.querySelector('.product-modal__description'),
+    };
 
-  const sizeEls = {
-    placholder: document.querySelector('.product-modal__size-placeholder'),
-    button: document.querySelector('.product-modal__size-toggle'),
-    icon: document.querySelector('.product-modal__size-toggle-icon'),
-    dropdown: document.querySelector('.product-modal__size-dropdown'),
-  };
+    const sizeEls = {
+        placholder: document.querySelector('.product-modal__size-placeholder'),
+        button: document.querySelector('.product-modal__size-toggle'),
+        icon: document.querySelector('.product-modal__size-toggle-icon'),
+        dropdown: document.querySelector('.product-modal__size-dropdown'),
+    };
 
-  const colorEls = {
-    colorOptions: document.querySelector('.product-modal__color-options'),
-    colorDivs: document.querySelectorAll('.product-modal__color-option'),
-    indicator: document.querySelector('.product-modal__color-indicator'),
-  };
+    const colorEls = {
+        colorOptions: document.querySelector('.product-modal__color-options'),
+        colorDivs: document.querySelectorAll('.product-modal__color-option'),
+        indicator: document.querySelector('.product-modal__color-indicator'),
+    };
 
-  function openModal(productData) {
-    modalEls.container.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    function openModal(productData) {
+        modalEls.container.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
 
-    modalEls.image.src = productData.featured_image;
-    modalEls.title.textContent = productData.title;
-    modalEls.price.textContent = `${(productData.price / 100).toFixed(2)} €`;
-    modalEls.description.innerHTML = productData.description;
+        modalEls.image.src = productData.featured_image;
+        modalEls.title.textContent = productData.title;
+        modalEls.price.textContent = `${(productData.price / 100).toFixed(2)} €`;
+        modalEls.description.innerHTML = productData.description;
 
-    renderColors(productData.variants);
-    renderSizes(productData.variants);
-  }
-
-  function toggleDropdown({ open, el, icon } = {}) {
-    let isOpen = el.dataset.isOpen === 'true';
-    isOpen = open ?? !isOpen;
-    el.style.height = isOpen ? '200%' : '0';
-    if (icon) {
-      icon.style.transform = isOpen ? 'rotate(-180deg)' : 'rotate(0)';
+        renderColors(productData.variants);
+        renderSizes(productData.variants);
     }
-    el.dataset.isOpen = isOpen;
-  }
 
-  function renderColors(variants) {
-    const colors = [...new Set(variants.map((v) => v.option2).filter(Boolean))];
-    colors.forEach((color, index) => {
-      if (colorEls.colorDivs[index]) {
-        colorEls.colorDivs[index].textContent = color;
-      }
+    function toggleDropdown({
+        open,
+        el,
+        icon
+    } = {}) {
+        let isOpen = el.dataset.isOpen === 'true';
+        isOpen = open ? ? !isOpen;
+        el.style.height = isOpen ? '200%' : '0';
+        if (icon) {
+            icon.style.transform = isOpen ? 'rotate(-180deg)' : 'rotate(0)';
+        }
+        el.dataset.isOpen = isOpen;
+    }
+
+    function renderColors(variants) {
+        const colors = [...new Set(variants.map((v) => v.option2).filter(Boolean))];
+        colors.forEach((color, index) => {
+            if (colorEls.colorDivs[index]) {
+                colorEls.colorDivs[index].textContent = color;
+            }
+        });
+    }
+
+    function renderSizes(variants) {
+        const sizes = [...new Set(variants.map((v) => v.option1).filter(Boolean))];
+        sizeEls.dropdown.innerHTML = sizes.map((size) => `<div class='product-modal__size-option'>${size}</div>`).join('');
+    }
+
+    function closeModal() {
+        modalEls.container.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    modalEls.closeButton.addEventListener('click', () => {
+        toggleDropdown({
+            open: false,
+            el: sizeEls.dropdown,
+            icon: sizeEls.icon
+        });
+        closeModal();
     });
-  }
 
-  function renderSizes(variants) {
-    const sizes = [...new Set(variants.map((v) => v.option1).filter(Boolean))];
-    sizeEls.dropdown.innerHTML = sizes.map((size) => `<div class='product-modal__size-option'>${size}</div>`).join('');
-  }
-
-  function closeModal() {
-    modalEls.container.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  modalEls.closeButton.addEventListener('click', () => {
-    toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
-    closeModal();
-  });
-
-  sizeEls.button.addEventListener('click', () => {
-    toggleDropdown({ el: sizeEls.dropdown, icon: sizeEls.icon });
-    sizeEls.placholder.textContent = 'Choose your size';
-  });
-  sizeEls.dropdown.addEventListener('click', (e) => {
-    if (e.target.classList.contains('product-modal__size-option')) {
-      sizeEls.placholder.textContent = e.target.textContent;
-      toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
-    }
-  });
-
-  colorEls.colorOptions.addEventListener('click', (e) => {
-    if (e.target.classList.contains('product-modal__color-option--2')) {
-      colorEls.indicator.style.transform = 'translateX(100%)';
-      colorEls.colorDivs[1].style.color = '#fff';
-      colorEls.colorDivs[0].style.color = '#000';
-    } else if (e.target.classList.contains('product-modal__color-option--1')) {
-      colorEls.indicator.style.transform = 'translateX(0)';
-      colorEls.colorDivs[0].style.color = '#fff';
-      colorEls.colorDivs[1].style.color = '#000';
-    }
-  });
-
-  document.querySelectorAll('.product-grid__item').forEach((productEl) => {
-    productEl.addEventListener('click', () => {
-      const data = JSON.parse(productEl.dataset.product);
-      openModal(data);
+    sizeEls.button.addEventListener('click', () => {
+        toggleDropdown({
+            el: sizeEls.dropdown,
+            icon: sizeEls.icon
+        });
+        sizeEls.placholder.textContent = 'Choose your size';
     });
-  });
+    sizeEls.dropdown.addEventListener('click', (e) => {
+        if (e.target.classList.contains('product-modal__size-option')) {
+            sizeEls.placholder.textContent = e.target.textContent;
+            toggleDropdown({
+                open: false,
+                el: sizeEls.dropdown,
+                icon: sizeEls.icon
+            });
+        }
+    });
+
+    colorEls.colorOptions.addEventListener('click', (e) => {
+        if (e.target.classList.contains('product-modal__color-option--2')) {
+            colorEls.indicator.style.transform = 'translateX(100%)';
+            colorEls.colorDivs[1].style.color = '#fff';
+            colorEls.colorDivs[0].style.color = '#000';
+        } else if (e.target.classList.contains('product-modal__color-option--1')) {
+            colorEls.indicator.style.transform = 'translateX(0)';
+            colorEls.colorDivs[0].style.color = '#fff';
+            colorEls.colorDivs[1].style.color = '#000';
+        }
+    });
+
+    document.querySelectorAll('.product-grid__item').forEach((productEl) => {
+        productEl.addEventListener('click', () => {
+            const data = JSON.parse(productEl.dataset.product);
+            openModal(data);
+        });
+    });
 </script>
 
 {% schema %}
 {
-  "name": "Grid",
-  "settings": []
+"name": "Grid",
+"settings": []
 }
 {% endschema %}
