@@ -16,8 +16,9 @@
       <p>Color</p>
       <div class="color-options">
         <div class="animator"></div>
-        <div class="color color1">Black</div>
-        <div class="color color2">Blue</div>
+        <div class="color-optionss">
+
+        </div>
       </div>
     </div>
     <div class="size-selector">
@@ -30,11 +31,6 @@
             alt=""></div>
       </div>
       <div class="size-dropdown">
-        <div class="size-option">XS</div>
-        <div class="size-option">S</div>
-        <div class="size-option">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
       </div>
     </div>
     <button class="add-to-cart">
@@ -47,9 +43,6 @@
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
       {% for product in collections["frontpage"].products %}
-        <script>
-          console.log({{ product | json }});
-        </script>
         <div
         class="product1"
         data-product="{{ product | json |  escape }}"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
@@ -67,47 +60,86 @@
   const productTitle = document.querySelector(".product-title");
   const productPrice = document.querySelector(".product-price");
   const productDescription = document.querySelector(".product-description");
+
+  const sizeSelectorButton = document.querySelector(".icon");
+  const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
+  const sizeSelectorDropdown = document.querySelector(".size-dropdown");
+  const sizeOptions = document.querySelectorAll(".size-option");
+  const choose = document.querySelector(".choose");
+
+  const colorOptions = document.querySelector(".color-optionss")
+  const color1 = document.querySelector(".color1");
+  const color2 = document.querySelector(".color2");
+
+  const bar = document.querySelector(".animator");
   
   products.forEach(product => {
     product.addEventListener("click", ()=>{
       const data = JSON.parse(product.dataset.product);
 
-      console.log(typeof data.price);
+      const variants = data.variants;
+
+      const sizes = [...new Set(variants.map(v => v.option1).filter(Boolean))];
+      const colors = [...new Set(variants.map(v => v.option2).filter(Boolean))];
 
       modal.style.display = "flex";
       productImage.src = data.featured_image;
       productTitle.textContent = data.title;
       productPrice.textContent = `${(data.price/100).toFixed(2)} €`;
       productDescription.innerHTML = data.description;
+
+      sizeSelectorDropdown.innerHTML = "";
+      colorOptions.innerHTML = "";
+
+      colors.forEach((color, index)=>{
+        const div = document.createElement("div");
+        div.classList.add(`color`, `color${index+1}`);
+        div.textContent = color;
+
+        div.addEventListener("click", ()=>{
+          console.log(bar);
+        });
+
+        colorOptions.appendChild(div);
+      });
+
+      sizes.forEach(size => {
+        const div = document.createElement("div");
+        div.classList.add("size-option");
+        div.textContent = size;
+        sizeSelectorDropdown.appendChild(div);
+      });
     })
   })
   
   closeModal.addEventListener("click", ()=>{
     modal.style.display = "none";
   })
-  
-  
-  const color1 = document.querySelector(".color1");
-  const color2 = document.querySelector(".color2");
-  const bar = document.querySelector(".animator");
-  
-  color2.addEventListener("click", ()=>{
-    bar.style.transform = "translateX(100%)";
-    color2.style.color = "#fff";
-    color1.style.color = "#000";
-  });
-  
-  color1.addEventListener("click", ()=>{
-    bar.style.transform = "translateX(0%)";
-    color1.style.color = "#fff";
-    color2.style.color = "#000";
-  });
-  
-  const sizeSelectorButton = document.querySelector(".icon");
-  const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
-  const sizeSelectorDropdown = document.querySelector(".size-dropdown");
-  const sizeOptions = document.querySelectorAll(".size-option");
-  const choose = document.querySelector(".choose");
+
+  console.log(bar);
+
+  colorOptions.addEventListener("click", (e)=>{
+    if(e.target.classList.contains("color2")){
+      bar.style.transform = "translateX(100%)";
+      console.log(bar);
+      console.log(color2);
+      console.log(color1);
+      color2.style.color = "#fff";
+      color1.style.color = "#000";
+    }else if (e.targe.classList.contains("color1")){
+      bar.style.transform = "translateX(0%)";
+      color1.style.color = "#fff";
+      color2.style.color = "#000";
+    }
+  })
+
+  sizeSelectorDropdown.addEventListener("click", (e)=>{
+      if(e.target.classList.contains("size-option")){
+        sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
+        toggleDropdown();
+        choose.innerText = e.target.innerText;
+      }
+  })
   
   sizeOptions.forEach(option => {
     option.addEventListener("click", ()=>{

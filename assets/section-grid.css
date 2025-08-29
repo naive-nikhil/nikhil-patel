@@ -38,7 +38,6 @@
 }
 
 
-
 .img-wrapper {
   width: 50%;
   overflow: hidden;
@@ -89,6 +88,9 @@
 .color-options {
   margin-top: 0.5rem;
   position: relative;
+}
+
+.color-optionss{
   display: flex;
   overflow: hidden;
 }
@@ -153,7 +155,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.color-options .animator {
+.animator {
   position: absolute;
   cursor: pointer;
   width: 50%;
@@ -162,7 +164,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.color-options .color {
+.color-optionss .color {
   cursor: pointer;
   font-size: 1.2rem;
   width: 100%;
