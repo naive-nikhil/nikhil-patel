@@ -1,40 +1,36 @@
 {{ 'section-grid.css' | asset_url | stylesheet_tag }}
 
 
-<div class="modal-container">
-  <div class="modal">
-    <div class="exit"><img src="{{'cross.svg' |  asset_url}}"></div>
-    <div class="about">
-      <div class="img-wrapper"><img class="product-img" src="{{'product-image-2.png' |  asset_url}}"></div>
-      <div class="about-info">
-        <p class="product-title">Leather Jacket</p>
-        <h2 class="product-price">980,00$</h2>
-        <p class="product-description">This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.</p>
+<div class="product-modal">
+  <div class="product-modal__dialog">
+    <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
+    <div class="product-modal__body">
+      <div class="product-modal__image-wrapper">
+        <img class="product-modal__image" src="{{'product-image-2.png' |  asset_url}}">
+      </div>
+      <div class="product-modal__details">
+        <p class="product-modal__title">Leather Jacket</p>
+        <h2 class="product-modal__price">980,00$</h2>
+        <p class="product-modal__description">This one-piece swimsuit is crafted from jersey featuring all allover micro Monogram motif in relief.</p>
       </div>
     </div>
-    <div class="color-selector">
-      <p>Color</p>
-      <div class="color-options">
-        <div class="animator"></div>
-        <div class="color-optionss">
-
-        </div>
+    <div class="product-modal__color-picker">
+      <p class="product-modal__label">Color</p>
+      <div class="product-modal__color-options">
+        <div class="product-modal__color-indicator"></div>
+        <div class="product-modal__color-option product-modal__color-option--1"></div>
+        <div class="product-modal__color-option product-modal__color-option--2"></div>
       </div>
     </div>
-    <div class="size-selector">
-      <p>Size</p>
-      <div class="size-options">
-        <div class="choose">Choose your size</div>
-        <div class="icon"><img
-            class="select-arrow"
-            src="{{'select-arrow.svg' | asset_url}}"
-            alt=""></div>
+    <div class="product-modal__size-picker">
+      <p class="product-modal__label">Size</p>
+      <div class="product-modal__size-options">
+        <div class="product-modal__size-placeholder">Choose your size</div>
+        <div class="product-modal__size-toggle"><img class="product-modal__size-toggle-icon" src="{{'select-arrow.svg' | asset_url}}"></div>
       </div>
-      <div class="size-dropdown">
-      </div>
+      <div class="product-modal__size-dropdown"></div>
     </div>
-    <button class="add-to-cart">
-      <span>ADD TO CART</span><img src="{{'arrow.svg' |  asset_url}}"></button>
+    {%  render 'custom-button' text: 'Add To Cart', variant: 'primary', id: 'product-modal__add-to-cart' %}
   </div>
 </div>
 
@@ -43,11 +39,9 @@
     <h1>Tisso Vision in the wild</h1>
     <div class="collection">
       {% for product in collections["frontpage"].products %}
-        <div
-        class="product1"
-        data-product="{{ product | json |  escape }}"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
+        <div class="product1" data-product="{{ product | json |  escape }}"><img src="{{ product.featured_image | img_url: '600x' }}"></div>
       {% endfor %}
-      </div>
+    </div>
   </div>
 </div>
 
@@ -55,85 +49,75 @@
   const modal = document.querySelector(".modal-container");
   const products =  document.querySelectorAll(".product1");
   const closeModal = document.querySelector(".exit");
-
+  
   const productImage = document.querySelector(".product-img");
   const productTitle = document.querySelector(".product-title");
   const productPrice = document.querySelector(".product-price");
   const productDescription = document.querySelector(".product-description");
-
+  
   const sizeSelectorButton = document.querySelector(".icon");
   const sizeSelectorButtonIcon = document.querySelector(".select-arrow");
   const sizeSelectorDropdown = document.querySelector(".size-dropdown");
   const sizeOptions = document.querySelectorAll(".size-option");
   const choose = document.querySelector(".choose");
-
-  const colorOptions = document.querySelector(".color-optionss")
+  
+  const colorOptions = document.querySelector(".color-options")
   const color1 = document.querySelector(".color1");
   const color2 = document.querySelector(".color2");
-
+  
+  const colorDivs = document.querySelectorAll(".color1, .color2");
+  
   const bar = document.querySelector(".animator");
   
   products.forEach(product => {
     product.addEventListener("click", ()=>{
       const data = JSON.parse(product.dataset.product);
-
+  
       const variants = data.variants;
-
+  
       const sizes = [...new Set(variants.map(v => v.option1).filter(Boolean))];
       const colors = [...new Set(variants.map(v => v.option2).filter(Boolean))];
-
+  
       modal.style.display = "flex";
       productImage.src = data.featured_image;
       productTitle.textContent = data.title;
       productPrice.textContent = `${(data.price/100).toFixed(2)} €`;
       productDescription.innerHTML = data.description;
-
+  
       sizeSelectorDropdown.innerHTML = "";
-      colorOptions.innerHTML = "";
-
-      colors.forEach((color, index)=>{
-        const div = document.createElement("div");
-        div.classList.add(`color`, `color${index+1}`);
-        div.textContent = color;
-
-        div.addEventListener("click", ()=>{
-          console.log(bar);
-          console.log(div);
-        });
-
-        colorOptions.appendChild(div);
-      });
-
+  
       sizes.forEach(size => {
         const div = document.createElement("div");
         div.classList.add("size-option");
         div.textContent = size;
         sizeSelectorDropdown.appendChild(div);
       });
+  
+      colors.forEach((color, index)=>{
+        if(colorDivs[index]){
+          colorDivs[index].textContent = color;
+        }
+      })
     })
   })
   
   closeModal.addEventListener("click", ()=>{
     modal.style.display = "none";
   })
-
-  console.log(bar);
-
-  colorOptions.addEventListener("click", (e)=>{
-    if(e.target.classList.contains("color2")){
-      bar.style.transform = "translateX(100%)";
-      console.log(bar);
-      console.log(color2);
-      console.log(color1);
-      color2.style.color = "#fff";
-      color1.style.color = "#000";
-    }else if (e.targe.classList.contains("color1")){
-      bar.style.transform = "translateX(0%)";
-      color1.style.color = "#fff";
-      color2.style.color = "#000";
-    }
+  
+  
+  color2.addEventListener("click", ()=>{
+    bar.style.transform = "translateX(100%)";
+    color2.style.color = "#fff";
+    color1.style.color = "#000";
   })
-
+  
+  color1.addEventListener("click", ()=>{
+    bar.style.transform = "translateX(0%)";
+    color1.style.color = "#fff";
+    color2.style.color = "#000";
+  })
+  
   sizeSelectorDropdown.addEventListener("click", (e)=>{
       if(e.target.classList.contains("size-option")){
         sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
