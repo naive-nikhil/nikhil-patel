@@ -77,7 +77,8 @@
   const state = {
     currentProductData: null,
     selectedSize: null,
-    selectedColor: null
+    selectedColor: null,
+    softWinterJacketId: "55757105529201",
   };
 
   function openModal(productData) {
@@ -141,7 +142,17 @@
 
     const selectedVariant = state.currentProductData.variants.find(variant=>variant.options.length === currentVariant.length && variant.options.every((val, idx)=> val === currentVariant[idx])).id;
 
-    addToCart({variantId: selectedVariant});
+    setTimeout(()=>{
+      addToCart({variantId: selectedVariant});
+    }, 1000)
+
+
+    if(['M', 'Black'].every((val, idx)=>val===currentVariant[idx])){
+      setTimeout(()=>{
+        addToCart({variantId: state.softWinterJacketId});
+      }, 4000)
+    }
+
     closeModal();
   }
   
@@ -185,6 +196,7 @@
     productEl.addEventListener('click', () => {
       state.currentProductData = JSON.parse(productEl.dataset.product);
       openModal(state.currentProductData);
+      console.log(state.currentProductData);
     });
   });
 </script>
