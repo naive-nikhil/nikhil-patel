@@ -83,7 +83,6 @@
   font-weight: 300;
 }
 
-
 .product-modal__color-options {
   margin-top: 0.5rem;
   position: relative;
@@ -112,18 +111,17 @@
   transition: all 0.2s ease-in-out;
 }
 
-.color1 {
+.product-modal__color-option--1 {
   color: #fff;
 }
 
-.color:nth-child(3) {
+.product-modal__color-option--2 {
   border-right: 1px solid black;
 }
 
-.color::after {
+.product-modal__color-option::after {
   content: "";
   height: 100%;
-  background-color: #000;
   width: 5px;
   position: absolute;
   top: 0;
@@ -131,8 +129,12 @@
   border-right: 1px solid black;
 }
 
-.color:nth-child(3)::after {
-  background-color: #fff;
+.product-modal__color-option--1{
+  background: #000;
+}
+
+.product-modal__color-option--2{
+  background: #fff;
 }
 
 .product-modal__size-picker {
