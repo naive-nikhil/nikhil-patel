@@ -6,6 +6,20 @@ header {
   justify-content: center;
 }
 
+.nav-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: row-reverse;
+}
+
+.navbar__cart-icon{
+  width: 2rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
 #nav-dropdown {
   position: absolute;
   top: 100%;

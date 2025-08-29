@@ -8,14 +8,16 @@
   <nav>
     <h1 class="logo">{{ section.settings.logo-text }}</h1>
     <div class="tagline">{{ section.settings.tagline }}</div>
+    <div class="nav-right">
     {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary', id: 'nav-button' %}
-  </nav>
+    <a href="/cart"><img class="navbar__cart-icon" src="{{'cart.png' |  asset_url}}" alt=""></a>
+    </div>
+    </nav>
   </div>
   <div id="nav-dropdown">
     <div class="tagline dropdown">{{ section.settings.tagline }}</div>
     {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary' %}
   </div>
-  <img src="{{'cart.png' |  asset_url}}" alt="">
 </header>
 
 <script>
