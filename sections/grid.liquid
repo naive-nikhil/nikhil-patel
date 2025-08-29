@@ -118,6 +118,7 @@
   function closeModal() {
     modalEls.container.style.display = 'none';
     document.body.style.overflow = '';
+    colorEls.indicator.style.transform = "translateX(0)";
   }
 
   const addToCart = async ({variantId, quantity}={})=>{
@@ -139,8 +140,11 @@
   function handleAddToCart(){
     const currentVariant = [];
     currentVariant.push(state.selectedSize, state.selectedColor);
+    
+    console.log(currentVariant);
 
     const selectedVariant = state.currentProductData.variants.find(variant=>variant.options.length === currentVariant.length && variant.options.every((val, idx)=> val === currentVariant[idx])).id;
+
 
     setTimeout(()=>{
       addToCart({variantId: selectedVariant});
@@ -160,6 +164,9 @@
   modalEls.closeButton.addEventListener('click', () => {
     toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
     closeModal();
+    state.selectedColor = null;
+    state.selectedSize = null;
+    sizeEls.placholder.textContent = 'Choose your size';
   });
 
   sizeEls.button.addEventListener('click', () => {
@@ -196,7 +203,7 @@
     productEl.addEventListener('click', () => {
       state.currentProductData = JSON.parse(productEl.dataset.product);
       openModal(state.currentProductData);
-      console.log(state.currentProductData);
+      state.selectedColor = colorEls.colorOptions.childNodes[0].dataset.color;
     });
   });
 </script>
