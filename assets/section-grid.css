@@ -93,6 +93,8 @@
 .product-modal__color-indicator {
   position: absolute;
   cursor: pointer;
+  top: 0;
+  left: 0;
   width: 50%;
   height: 100%;
   background: #000;
@@ -127,14 +129,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  border-right: 1px solid black;
-}
-
-.product-modal__color-option--1{
   background: #000;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
-.product-modal__color-option--2{
+.product-modal__color-option:nth-child(3)::after{
   background: #fff;
 }
 
@@ -179,10 +179,6 @@
   overflow: auto;
   z-index: 2;
   transition: all 0.3s ease-in-out;
-}
-
-.product-modal__size-dropdown::-webkit-scrollbar {
-  display: none;
 }
 
 .product-modal__size-option {
