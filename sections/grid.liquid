@@ -1,6 +1,6 @@
 {{ 'section-grid.css' | asset_url | stylesheet_tag }}
 
-
+{% comment %} Modal For Product Pop Up {% endcomment %}
 <div class="product-modal">
   <div class="product-modal__dialog">
     <button class="product-modal__close"><img src="{{'cross.svg' |  asset_url}}"></button>
@@ -34,6 +34,7 @@
   </div>
 </div>
 
+{% comment %} Main Grid for Collection of Products {% endcomment %}
 <div class="grid-container">
   <div class="grid-sub-container">
     <h1>Tisso Vision in the wild</h1>
@@ -88,7 +89,7 @@
   
       sizes.forEach(size => {
         const div = document.createElement("div");
-        div.classList.add("size-option");
+        div.classList.add("product-modal__size-option");
         div.textContent = size;
         sizeSelectorDropdown.appendChild(div);
       });
@@ -119,7 +120,7 @@
   })
   
   sizeSelectorDropdown.addEventListener("click", (e)=>{
-      if(e.target.classList.contains("size-option")){
+      if(e.target.classList.contains("product-modal__size-option")){
         sizeSelectorDropdownIsOpen = !sizeSelectorDropdownIsOpen;
         toggleDropdown();
         choose.innerText = e.target.innerText;
