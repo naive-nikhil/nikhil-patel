@@ -4,7 +4,6 @@
   font-family: "Jost", sans-serif;
   margin: 0;
   border: 0;
-  /* outline: 1px solid black; */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -12,7 +11,7 @@
   display: none;
 }
 
-
+/* Styling - custom button snippet */
 .custom-btn{
     position: relative;
     padding: 0.8rem 4rem;
