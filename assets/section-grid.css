@@ -318,7 +318,7 @@
   background: #fff;
   box-shadow: 0 2px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  padding: 0 0.5rem;
+  padding: 0.25rem 2rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: none;
 }
@@ -340,6 +340,7 @@
 .popups__message{
   padding: 0.25rem 0;
   text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 .popups__close{
