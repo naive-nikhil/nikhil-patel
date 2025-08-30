@@ -22,6 +22,8 @@
 </header>
 
 <script>
+  // Required Selectors
+
   const navEls = {
     toggle: document.querySelector(".navbar__menu-toggle"),
     icon: document.querySelector(".navbar__menu-toggle-icon"),
@@ -30,9 +32,9 @@
   
   const menuIconSrc = "{{'menu.svg' |  asset_url}}";
   const crossIconSrc = "{{'cross.svg' |  asset_url}}";
-  
+
+  // Functionality for toggling navbar dropdown
   let isOpen = false;
-  
   navEls.toggle.addEventListener("click", () => {
     isOpen = !isOpen;
   
