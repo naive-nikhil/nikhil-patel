@@ -1,44 +1,46 @@
 {{ 'section-navbar.css' | asset_url | stylesheet_tag }}
 
 <header>
-  <div id="menu-toggle">
-    <img src="{{'menu.svg' |  asset_url}}" id="menu-icon">
+  <div class="navbar__menu-toggle">
+    <img src="{{'menu.svg' |  asset_url}}" class="navbar__menu-toggle-icon">
   </div>
-  <div class="nav-container">
-  <nav>
-    <h1 class="logo">{{ section.settings.logo-text }}</h1>
-    <div class="tagline">{{ section.settings.tagline }}</div>
-    <div class="nav-right">
-    {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary', id: 'nav-button' %}
-    <a href="/cart"><img class="navbar__cart-icon" src="{{'cart.png' |  asset_url}}" alt=""></a>
-    </div>
+  <div class="navbar__wrapper">
+    <nav class="navbar__sub-wrapper">
+      <h1 class="navbar__logo">{{ section.settings.logo-text }}</h1>
+      <div class="navbar__tagline">{{ section.settings.tagline }}</div>
+      <div class="navbar__right-section">
+        {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary', id: 'navbar__button' %}
+        <a href="/cart"><img class="navbar__cart-icon" src="{{'cart.png' |  asset_url}}" alt=""></a>
+      </div>
     </nav>
   </div>
-  <div id="nav-dropdown">
-    <div class="tagline dropdown">{{ section.settings.tagline }}</div>
+  <div class="navbar__dropdown">
+    <div class="navbar__dropdown-tagline">{{ section.settings.tagline }}</div>
     {%  render 'custom-button', text: section.settings.button-text, variant: 'secondary' %}
   </div>
 </header>
 
 <script>
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuIcon = document.getElementById("menu-icon");
-  const navDropdown = document.getElementById('nav-dropdown');
+  const navEls = {
+    toggle: document.querySelector(".navbar__menu-toggle"),
+    icon: document.querySelector(".navbar__menu-toggle-icon"),
+    dropdown: document.querySelector(".navbar__dropdown")
+  }
   
   const menuIconSrc = "{{'menu.svg' |  asset_url}}";
   const crossIconSrc = "{{'cross.svg' |  asset_url}}";
   
   let isOpen = false;
   
-  menuToggle.addEventListener("click", () => {
+  navEls.toggle.addEventListener("click", () => {
     isOpen = !isOpen;
   
     if(isOpen){
-      menuIcon.src = crossIconSrc;
-      navDropdown.style.height = "160px";
+      navEls.icon.src = crossIconSrc;
+      navEls.dropdown.style.height = "140px";
     } else {
-      menuIcon.src = menuIconSrc;
-      navDropdown.style.height = "0px";
+      navEls.icon.src = menuIconSrc;
+      navEls.dropdown.style.height = "0";
     }
   });
 </script>
