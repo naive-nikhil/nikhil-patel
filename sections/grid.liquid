@@ -1,5 +1,7 @@
 {{ 'section-grid.css' | asset_url | stylesheet_tag }}
 
+{% comment %} Grid Section {% endcomment %}
+
 {% comment %} Modal for product popup {% endcomment %}
 <div class="product-modal">
   <div class="product-modal__dialog">
@@ -58,6 +60,8 @@
 </div>
 
 <script>
+  // Required Selectors
+  
   const modalEls = {
     closeButton: document.querySelector('.product-modal__close'),
     container: document.querySelector('.product-modal'),
@@ -95,6 +99,9 @@
     softWinterJacketId: "55757105529201",
   };
 
+  // Functions
+
+  // Function to open modal
   function openModal(productData) {
     modalEls.container.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -108,6 +115,7 @@
     renderSizes(productData.variants);
   }
 
+  // Function to toggle dropdown (Universal)
   function toggleDropdown({ open, el, icon } = {}) {
     let isOpen = el.dataset.isOpen === 'true';
     isOpen = open ?? !isOpen;
@@ -129,6 +137,7 @@
     sizeEls.dropdown.innerHTML = sizes.map((size) => `<div class='product-modal__size-option' data-selected="" data-size="${size}">${size}</div>`).join('');
   }
 
+  // Function to close modal
   function closeModal() {
     modalEls.container.style.display = 'none';
     document.body.style.overflow = '';
@@ -136,6 +145,7 @@
     sizeEls.placholder.textContent = 'Choose your size';
   }
 
+  // Function to add items in the cart
   const addToCart = async ({variantId, quantity}={})=>{
     try {
       const res = await fetch('/cart/add.js', {
@@ -151,8 +161,9 @@
     }
   }
 
-  let popupTimeout;
 
+  // Function for showing popup messages
+  let popupTimeout;
   function showPopup(message, duration = 5000) {
     clearTimeout(popupTimeout);
 
@@ -172,6 +183,7 @@
     }, duration);
   }
 
+  // Function which handles click on the add to cart button
   function handleAddToCart(){
     const currentVariant = [];
     currentVariant.push(state.selectedSize, state.selectedColor);
@@ -194,8 +206,11 @@
     }
     closeModal();
   }
+
+  // Event Listeners
   
 
+  // Event listener for modal close button
   modalEls.closeButton.addEventListener('click', () => {
     toggleDropdown({ open: false, el: sizeEls.dropdown, icon: sizeEls.icon });
     closeModal();
@@ -203,11 +218,13 @@
     state.selectedSize = null;
   });
 
+  // Event listener for button which toggle the dropdown for sizes
   sizeEls.button.addEventListener('click', () => {
     toggleDropdown({ el: sizeEls.dropdown, icon: sizeEls.icon });
     sizeEls.placholder.textContent = 'Choose your size';
   });
 
+  // Event listener for user click on the selected size
   sizeEls.dropdown.addEventListener('click', (e) => {
     if (e.target.classList.contains('product-modal__size-option')) {
       sizeEls.placholder.textContent = e.target.dataset.size;
@@ -216,6 +233,7 @@
     }
   });
 
+  // Event listener for user click on the selected color
   colorEls.colorOptions.addEventListener('click', (e) => {
     if (e.target.classList.contains('product-modal__color-option')) {
       state.selectedColor = e.target.dataset.color;
@@ -229,14 +247,17 @@
     }
   });
 
+  // Event listener for user click on the cart button
   modalEls.cartButton.addEventListener("click", ()=>{
     handleAddToCart();
   })
 
+  // Event listener for popup close button
   popupEls.closeButton.addEventListener("click", ()=>{
     popupEls.popup.style.display = "none";
   })
 
+  // Event listener for user click on any product
   document.querySelectorAll('.product-grid__item').forEach((productEl) => {
     productEl.addEventListener('click', () => {
       state.currentProductData = JSON.parse(productEl.dataset.product);

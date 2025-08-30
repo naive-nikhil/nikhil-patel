@@ -1,25 +1,25 @@
 {{ 'section-hero.css' | asset_url | stylesheet_tag }}
 
-<div id="hero-container">
-  <div class="img-container">
-    <img src="{{'hero.svg' |  asset_url}}">
+{% comment %} Hero Section {% endcomment %}
+<div class="hero__wrapper">
+  <div class="hero__image-wrapper">
+    <img class="hero__image" src="{{'hero.svg' |  asset_url}}">
   </div>
-  <div class="content-container">
-    <div class="left-section">
-      <div class="left-section-2">
-        <h1>{{ section.settings.headline }}</h1>
-        <div class="brand-description">
-        <p>{{ section.settings.description }}</p>
-        <span>{{ section.settings.sub-description }}</span>
+  <div class="hero__content">
+    <div class="hero__content-left">
+      <div class="hero__content-details">
+        <h1 class="hero__headline">{{ section.settings.headline }}</h1>
+        <div class="hero__description">
+          <p class="hero__description-main">{{ section.settings.description }}</p>
+          <span class="hero__description-sub">{{ section.settings.sub-description }}</span>
         </div>
-        {% render 'custom-button', text: section.settings.cta-text, id: 'hero-button' %}
+        {% render 'custom-button', text: section.settings.cta-text, id: 'hero__call-to-action' %}
       </div>
     </div>
-    <div class="right-section"><img src="{{'hero.svg' |  asset_url}}"></div>
+    <div class="hero__content-right"><img class="hero__secondary-image" src="{{'hero.svg' |  asset_url}}"></div>
   </div>
-  <p id="ribbon">{{ section.settings.ribbon-text }}</p>
+  <p class="hero__ribbon">{{ section.settings.ribbon-text }}</p>
 </div>
-
 
 {% schema %}
   {
