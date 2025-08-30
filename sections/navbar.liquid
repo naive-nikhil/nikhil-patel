@@ -27,8 +27,20 @@
   
   const menuIconSrc = "{{'menu.svg' |  asset_url}}";
   const crossIconSrc = "{{'cross.svg' |  asset_url}}";
-
-  toggleDropdown({el:navDropdown, icon: menuIcon});
+  
+  let isOpen = false;
+  
+  menuToggle.addEventListener("click", () => {
+    isOpen = !isOpen;
+  
+    if(isOpen){
+      menuIcon.src = crossIconSrc;
+      navDropdown.style.height = "160px";
+    } else {
+      menuIcon.src = menuIconSrc;
+      navDropdown.style.height = "0px";
+    }
+  });
 </script>
 
 {% schema %}

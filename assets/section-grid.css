@@ -304,3 +304,45 @@
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
 }
+
+/* Styling - Popup Messages */
+.popups{
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background: #fff;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  padding: 0 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+}
+
+.popups.active{
+  display: flex;
+}
+
+.popups__indicator{
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 4px;
+  background: green;
+  transition: width 5s linear;
+}
+
+.popups__message{
+  padding: 0.25rem 0;
+  text-transform: uppercase;
+}
+
+.popups__close{
+  cursor: pointer;
+  width: 0.75rem;
+}

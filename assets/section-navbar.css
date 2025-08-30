@@ -28,6 +28,7 @@ header {
   background: #f2f2f2;
   display: none;
   height: 0;
+  max-height: 400px;
   overflow: hidden;
   z-index: 2;
   transition: all 300ms ease-in-out;
